@@ -61,3 +61,39 @@ async function showUserRepos(username: string) {
     console.log(message);
   }
 }
+
+function showAllUsers() {
+  let message = "Users:\n";
+
+  users.forEach((user) => {
+    message += `\n- ${user.login}`;
+  });
+
+  alert(message);
+}
+
+function showReposTotal() {
+  const reposTotal = users.reduce(
+    (accumulator, user) => accumulator + user.public_repos,
+    0
+  );
+
+  alert(`The group has a total of ${reposTotal} public repositories`);
+}
+
+function showTopFive() {
+  const topFive = users
+    .slice()
+    .sort((a, b) => b.public_repos - a.public_repos)
+    .slice(0, 5);
+
+  let message = "Top 5 user with more public repositories:\n";
+
+  topFive.forEach((user, index) => {
+    message += `\n${index + 1} - ${user.login}: ${
+      user.public_repos
+    } repositories`;
+  });
+
+  alert(message);
+}
